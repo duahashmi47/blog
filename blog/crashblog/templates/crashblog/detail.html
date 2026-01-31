@@ -22,6 +22,8 @@
                             <p class="subtitle">{{ post.created_at|timesince }} ago</p>
                             <p>{{ post.intro }}</p>
                             <p>{{ post.content }}</p>
+                            <p><small>Category: <a href="{% url 'category_detail' post.category.slug %}">{{
+                                        post.category }}</a></small></p>
                             <hr>
                             <h2 class="subtitle is-4">Comments</h2>
                             <form class="mb-6" method="post">
