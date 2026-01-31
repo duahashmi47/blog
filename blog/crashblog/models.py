@@ -11,6 +11,9 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return f'/category/{self.slug}/'
+
 class Post(models.Model):
     ACTIVE = 'active'
     DRAFT = 'draft'
@@ -26,12 +29,16 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=CHOICES, default=ACTIVE)
+    image = models.ImageField(upload_to='uploads/', blank=True, null=True)
     
     class Meta:
         ordering = ['-created_at',]
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return f'/{self.category.slug}/{self.slug}/'
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
